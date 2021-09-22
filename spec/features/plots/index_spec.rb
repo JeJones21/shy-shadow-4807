@@ -14,10 +14,9 @@ RSpec.describe 'Plot#index' do
   end
 
   it "can list all plot numbers" do
-    save_and_open_page
+
     expect(page).to have_content(@p1.number)
     expect(page).to have_content(@p2.number)
     expect(page).to have_content(@p3.number)
-
   end
 end
