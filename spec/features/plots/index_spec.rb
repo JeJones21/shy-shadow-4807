@@ -12,7 +12,10 @@ RSpec.describe 'Plot#index' do
     @plant1 = @p1.plants.create!(name: 'Prickly Pear Cactus', description: 'Spikey', days_to_harvest: 100)
     @plant2 = @p2.plants.create!(name: 'Monstera', description: 'Swiss Cheese', days_to_harvest: 45)
     @plant3 = @p3.plants.create!(name: 'Aloe', description: 'Medicinal', days_to_harvest: 60)
-
+    @inventory1 = Inventory.create!(plant_id: @plant1.id, plot_id: @p1.id)
+    @inventory1 = Inventory.create!(plant_id: @plant2.id, plot_id: @p1.id)
+    @inventory1 = Inventory.create!(plant_id: @plant3.id, plot_id: @p1.id)
+    @inventory1 = Inventory.create!(plant_id: @plant3.id, plot_id: @p2.id)
 
     visit plots_path
   end
@@ -32,10 +35,11 @@ RSpec.describe 'Plot#index' do
   end
 
   it "can show a link to remove a plant from plot" do
-    expect(page).to have_link("Remove Plant #{@plant3.name}")
+    expect(page).to have_link("Remove Plant #{@plant1.name}")
 
-    click_link "Remove Plant #{@plant3.name}"
+    click_link "Remove Plant #{@plant1.name}"
     save_and_open_page
-    expect(current_path).to eq(plots_path)
+
+    expect(page).to_not have_content(@plant1.name)
   end
 end
