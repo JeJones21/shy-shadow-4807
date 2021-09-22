@@ -1,0 +1,10 @@
+<h1>Plots</h1>
+<% @plots.each do |p| %>
+  <%= p.id %>
+  <p>Plot Numbers: <%= p.number %>
+  <h3>Plants:</h3>
+  <% p.plants.each do |plant| %>
+    <%= plant.name %>
+    <% end %>
+
+<% end %>
