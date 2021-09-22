@@ -5,6 +5,6 @@
   <h3>Plants:</h3>
   <% p.plants.each do |plant| %>
     <%= plant.name %>
-    <% end %>
-
+    <%= link_to "Remove Plant #{plant.name}", plots_path%>
+        <% end %>
 <% end %>

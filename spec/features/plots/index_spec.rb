@@ -25,9 +25,17 @@ RSpec.describe 'Plot#index' do
   end
 
   it "can list all plants related to plot" do
-    save_and_open_page
+
     expect(page).to have_content(@plant1.name)
     expect(page).to have_content(@plant2.name)
     expect(page).to have_content(@plant3.name)
+  end
+
+  it "can show a link to remove a plant from plot" do
+    expect(page).to have_link("Remove Plant #{@plant3.name}")
+
+    click_link "Remove Plant #{@plant3.name}"
+    save_and_open_page
+    expect(current_path).to eq(plots_path)
   end
 end
